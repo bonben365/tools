@@ -13,6 +13,11 @@ if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdenti
     break
 }
 
+#Change the DNS Server to Domain Controller.
+$InterfaceAlias = Get-DnsClientServerAddress -AddressFamily IPv4 | Where-Object {$_.InterfaceAlias -notlike 'Loopback*'} | foreach {
+    Set-DNSClientServerAddress $InterfaceAlias.InterfaceAlias –ServerAddresses ("10.10.19.22", "1.1.1.1")
+}
+
 #Pre-define username/password to preventing prompt when joinning.
 $username = "duybao\admin"
 $password = "1"
