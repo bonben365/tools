@@ -27,14 +27,14 @@ $username = "duybao\admin"
 $password = "1"
 $secstr = New-Object -TypeName System.Security.SecureString
 $password.ToCharArray() | ForEach-Object {$secstr.AppendChar($_)}
-$cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $secstr
+$cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $secstr
 
 #Check if the computer is a member of the domain then joins it.
 $domain = (Get-WMIObject -NameSpace "Root\Cimv2" -Class "Win32_ComputerSystem").Domain
 if ($domain -eq 'WORKGROUP') {
     Write-Host "This computer in in WORKGROUP." -ForegroundColor Yellow
     Write-Host "Joinning it into Domain...." -ForegroundColor Yellow
-    Add-Computer -DomainName 'duybao.me' -DomainCredential $creds -Restart
+    Add-Computer -DomainName 'duybao.me' -DomainCredential $cred -Restart
 } else {
     Write-Host "Already in Domain" -ForegroundColor Green
 }
