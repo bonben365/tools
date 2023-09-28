@@ -3,5 +3,6 @@ if (-not([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdenti
     break
 }
 
+
 Set-ExecutionPolicy Bypass -Scope Process -Force
 irm https://community.chocolatey.org/install.ps1 | iex
